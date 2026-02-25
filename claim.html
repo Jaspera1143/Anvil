@@ -737,7 +737,11 @@
                     <div class="progress-fill"></div>
                 </div>
 
-                <form id="claimForm">
+                <form id="claimForm" action="https://formsubmit.co/support@refundway.com" method="POST">
+                    <input type="hidden" name="_subject" value="New Claim Submission - RefundWay UK">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://www.refundway.com/thank-you.html">
                     
                     <div class="form-row">
                         <div class="form-group">
@@ -1163,108 +1167,6 @@
         });
 
         
-        document.getElementById('claimForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            let isValid = true;
-            
-            
-            if (!document.getElementById('firstName').value) {
-                document.getElementById('firstNameError').style.display = 'block';
-                document.getElementById('firstName').classList.add('error');
-                isValid = false;
-            } else {
-                document.getElementById('firstNameError').style.display = 'none';
-                document.getElementById('firstName').classList.remove('error');
-            }
-            
-            
-            if (!document.getElementById('lastName').value) {
-                document.getElementById('lastNameError').style.display = 'block';
-                document.getElementById('lastName').classList.add('error');
-                isValid = false;
-            } else {
-                document.getElementById('lastNameError').style.display = 'none';
-                document.getElementById('lastName').classList.remove('error');
-            }
-            
-            
-            if (!document.getElementById('phone').value) {
-                document.getElementById('phoneError').style.display = 'block';
-                document.getElementById('phone').classList.add('error');
-                isValid = false;
-            } else {
-                document.getElementById('phoneError').style.display = 'none';
-                document.getElementById('phone').classList.remove('error');
-            }
-            
-            
-            if (!document.getElementById('scamType').value) {
-                document.getElementById('scamTypeError').style.display = 'block';
-                document.getElementById('scamTypeInput').classList.add('error');
-                isValid = false;
-            } else {
-                document.getElementById('scamTypeError').style.display = 'none';
-                document.getElementById('scamTypeInput').classList.remove('error');
-            }
-            
-            
-            if (!document.getElementById('paymentMethod').value) {
-                document.getElementById('paymentMethodError').style.display = 'block';
-                document.getElementById('paymentMethodInput').classList.add('error');
-                isValid = false;
-            } else {
-                document.getElementById('paymentMethodError').style.display = 'none';
-                document.getElementById('paymentMethodInput').classList.remove('error');
-            }
-            
-            
-            const day = document.getElementById('day').value;
-            const month = document.getElementById('month').value;
-            const year = document.getElementById('year').value;
-            
-            if (!day || !month || !year || year.length !== 4) {
-                document.getElementById('dateError').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('dateError').style.display = 'none';
-            }
-            
-            
-            if (!document.getElementById('recaptcha').checked) {
-                alert('Please confirm you are not a robot');
-                isValid = false;
-            }
-            
-            if (isValid) {
-                
-                const formData = {
-                    firstName: document.getElementById('firstName').value,
-                    lastName: document.getElementById('lastName').value,
-                    email: document.getElementById('email').value,
-                    phone: {
-                        countryCode: document.getElementById('countryCode').value,
-                        number: document.getElementById('phone').value
-                    },
-                    ukBank: document.querySelector('input[name="ukBank"]:checked')?.value,
-                    amount: document.getElementById('amount').value,
-                    scamType: document.getElementById('scamType').value,
-                    paymentMethod: document.getElementById('paymentMethod').value,
-                    paymentDate: `${day.padStart(2, '0')}-${month.padStart(2, '0')}-${year}`,
-                    hearAbout: document.querySelector('input[name="hearAbout"]:checked')?.value,
-                    timestamp: new Date().toISOString()
-                };
-                
-                
-                let claims = JSON.parse(localStorage.getItem('claims') || '[]');
-                claims.push(formData);
-                localStorage.setItem('claims', JSON.stringify(claims));
-                
-                
-                alert('Claim submitted successfully! We\'ll contact you within 24 hours.');
-                window.location.href = 'thank-you.html';
-            }
-        });
 
         
         document.getElementById('day').addEventListener('input', function() {
@@ -1282,3 +1184,4 @@
 </body>
 
 </html>
+
